@@ -8,15 +8,15 @@ export const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userData, setUserData] = useState({});
-
+    const [loading, setLoading] = useState(true);
 
     let isverify=!!token;
-    console.log(isverify);
+    // console.log(isverify);
    
 
     const fetchUserData = async () => {
     //   console.log(token)
-
+         setLoading(true);
         try {
             const response = await fetch('http://localhost:5000/api/user/auth', {
                 method: "GET",
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
             const message = await response.json();
             console.log(message)
             setUserData(message)
+            setLoading(false);
             }
             else {
                 const errormessage = await response.json();
@@ -56,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{userData,token,logout,isverify}}>
+        <AuthContext.Provider value={{userData,token,logout,isverify ,loading}}>
             {children}
         </AuthContext.Provider>
     );

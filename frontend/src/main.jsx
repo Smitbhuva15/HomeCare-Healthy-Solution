@@ -9,6 +9,14 @@ import Appointment from './pages/Appointment.jsx';
 import Login from './components/Login.jsx';
 import SignUp from './components/SignUp.jsx';
 import {AuthProvider}  from './contexApi/AuthContex.jsx'
+import Admin from './Admin.jsx'
+import AddNewDoctor from './components/Admin/AddNewDoctor.jsx'
+import AddnewAdmin from './components/Admin/AddnewAdmin.jsx'
+import Dashborad from './components/Admin/Dashborad.jsx'
+import Doctors from './components/Admin/Doctors.jsx'
+import Message from './components/Admin/Message.jsx'
+
+
 
 const router = createBrowserRouter([
   {
@@ -38,6 +46,35 @@ const router = createBrowserRouter([
 
     ],
   },
+  {
+    path: '/admin',
+    element: <Admin />,
+    children: [
+      {
+        path: '/admin',
+       element: <Dashborad/>
+      },
+      {
+        path: '/admin/add/admin',
+       element: <AddnewAdmin/>
+      },
+      {
+        path: '/admin/add/doctor',
+       element: <AddNewDoctor/>
+      },
+      {
+        path: '/admin/doctors',
+       element: <Doctors/>
+      },
+      {
+        path: '/admin/message',
+       element: <Message/>
+      },
+      
+      
+    ],
+  },
+
 ]);
 
 
