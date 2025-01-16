@@ -235,7 +235,7 @@ h6 {
     flex-direction: column;
   }
 }
-@media (max-width: 888px) {
+@media (max-width: 1024px) {
   .form-component {
     padding-top: 30px;
     padding-bottom: 30px;
