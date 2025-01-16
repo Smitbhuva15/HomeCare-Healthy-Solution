@@ -21,6 +21,7 @@ exports.sendappointment=async(req,res)=>{
             hasVisited,
             address,
         }=req.body;
+      
 
         if (
           !firstName ||
@@ -34,7 +35,8 @@ exports.sendappointment=async(req,res)=>{
           !department ||
           !doctor_firstName ||
           !doctor_lastName ||
-          !address
+          !address 
+          
         ) {
           return res.status(400).json({message : "Please Fill Full Form !!"})
         }
@@ -124,24 +126,34 @@ exports.deleteappointment=async(req,res)=>{
 
 }
 
-exports.updateappointment=async(req,res)=>{
-  const id=req.params.id;
+exports.updateappointment = async (req, res) => {
+  const id = req.params.id;
+
+
   try {
-    const appointmentdata=await appointmentmodel.findOne({_id:id});
-    if(!appointmentdata){
-   return res.status(404).json({message : "Appointment not found"}); 
-    }
+    const appointmentdata = await appointmentmodel.findOne({ _id: id });
    
-    const updateddata=res.body;
-    await appointmentmodel.updateOne(
-      {_id:id},   // first find using id
-      {updateddata}   //after update the data
-    )
-    return res.status(500).json({message : "update data successfully !!"}); 
-  
+
+    if (!appointmentdata) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    const updateddata = req.body;  
+   
+
+    if (updateddata) {
      
+      await appointmentmodel.updateOne(
+        { _id: id },
+        { $set: updateddata }  
+      );
+
+      return res.status(200).json({ message: "Appointment updated successfully!" });
+    } else {
+      return res.status(400).json({ message: "No data provided to update" }); 
+    }
   } catch (error) {
-    return res.status(500).json({message : "Internal Sever Error"}); 
-    
+    console.error(error); 
+    return res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};

@@ -9,7 +9,7 @@ exports.authmiddelware = async (req, res, next) => {
     }
     const jwtToken = token.split(" ")[1];
     
-
+//    console.log(jwtToken)
     if (!jwtToken) {
         return res.status(400).json({ message: "Token is missing" });
     }
@@ -17,10 +17,10 @@ exports.authmiddelware = async (req, res, next) => {
     try {
 
         const userSmallInfo = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
-        // console.log(userSmallInfo)
+        
         const _id = userSmallInfo.id;
-        const user_data = await userModel.findOne({_id:userSmallInfo.id })
-        // console.log(user_data); 
+        const user_data = await userModel.findOne({_id:userSmallInfo.id },{password:0})
+        
 
         req.user = user_data
 
@@ -30,6 +30,6 @@ exports.authmiddelware = async (req, res, next) => {
     } catch (error) {
         console.error(error);
 
-        return res.status(401).json({ message: "Internal error !!" });
+        return res.status(401).json({ message: "You Need To Log In First !!" });
     }
 };
