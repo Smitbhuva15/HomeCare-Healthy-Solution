@@ -14,47 +14,15 @@ const AppoitmentForm = () => {
     const { token,isverify } = useContext(AuthContext)
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const [doctorData, setDoctorData] = useState([]);
+   
 
     const [department1, setDepartment1] = useState();
 
-    // if(isverify){
-    //     navigate('/login');
-    //   }
+   
+      const {doctorData}= useContext(AuthContext)
 
-    //   if(isverify){
-    //     return null;
-    //   }
+      console.log(doctorData);
 
-
-    const fechingDoctorData = async () => {
-        try {
-            const response = await fetch("http://localhost:5000/api/user/getdatadoctor", {
-                method: "GET"
-            })
-
-            if (response.ok) {
-                const data = await response.json();
-
-                setDoctorData(data.doctorData);
-            }
-            else {
-                const error = await response.json();
-                // toast.error(error.message);
-                console.log(error);
-
-            }
-
-
-        } catch (error) {
-            console.log("doctor data feching error", error)
-        }
-    }
-
-    useEffect(() => {
-
-        fechingDoctorData();
-    }, []);
 
 
 
@@ -70,7 +38,7 @@ const AppoitmentForm = () => {
 
 
         try {
-            const response = await fetch("http://localhost:5000/api/user/appointment/send", {
+            const response = await fetch("https://homecare-healthy-solution.onrender.com/api/user/appointment/send", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

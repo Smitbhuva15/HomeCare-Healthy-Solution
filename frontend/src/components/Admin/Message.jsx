@@ -2,19 +2,43 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexApi/AuthContex";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Message = () => {
 
-  const { token } = useContext(AuthContext);
+  const { userData, token, loading, isverify } = useContext(AuthContext)
+
+
+    
+  if (loading) {
+    return (
+<div class="flex items-center justify-center min-h-screen">
+  <div class="w-24 h-24 border-8 border-t-8 border-transparent rounded-full animate-spin relative">
+    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-500 to-red-500 animate-spin-slow"></div>
+  </div>
+</div>  
+    )
+  }
+
+
+  
+  if (userData.role !== "Admin") {
+
+    return (
+      <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
+        <h1 >Only Admin Is Access This Feature!!</h1>
+      </div>
+    )
+  }
+
+
 
   const [message, setMessage] = useState([]);
 
-
-
   const fetchingmessage = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/message/get/all/message", {
+      const response = await fetch("https://homecare-healthy-solution.onrender.com/api/message/get/all/message", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`

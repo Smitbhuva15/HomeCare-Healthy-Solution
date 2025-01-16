@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
+     const [doctorData, setDoctorData] = useState([]);
 
     let isverify=!!token;
     // console.log(isverify);
@@ -18,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     //   console.log(token)
          setLoading(true);
         try {
-            const response = await fetch('http://localhost:5000/api/user/auth', {
+            const response = await fetch('https://homecare-healthy-solution.onrender.com/api/user/auth', {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -27,8 +28,8 @@ export const AuthProvider = ({ children }) => {
             })
             if (response.ok) {
             const message = await response.json();
-            console.log(message)
             setUserData(message)
+           console.log(message)
             setLoading(false);
             }
             else {
@@ -44,9 +45,40 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+
+
+     const fechingDoctorData = async () => {
+            try {
+                const response = await fetch("https://homecare-healthy-solution.onrender.com/api/user/getdatadoctor", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                      },
+    
+                })
+    
+                if (response.ok) {
+                    const data = await response.json();
+    
+                    setDoctorData(data.doctorData);
+                    
+                }
+                else {
+                    const error = await response.json();
+                    console.log(error);
+    
+                }
+    
+    
+            } catch (error) {
+                console.log("doctor data feching error", error)
+            }
+        }
+
    useEffect(() => {
     
     fetchUserData() 
+    fechingDoctorData();
    }, [token]);
 
    const logout=()=>{
@@ -57,7 +89,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{userData,token,logout,isverify ,loading}}>
+        <AuthContext.Provider value={{userData,token,logout,isverify,doctorData ,loading}}>
             {children}
         </AuthContext.Provider>
     );

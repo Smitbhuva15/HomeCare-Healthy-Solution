@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexApi/AuthContex';
 const AddNewDoctor = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const { userData, token, loading, isverify } = useContext(AuthContext)
+  const { userData, token, loading, isverify  } = useContext(AuthContext)
 
   const [docAvatar, setDocAvatar] = useState("");
   const [docAvatarPreview, setDocAvatarPreview] = useState("");
@@ -71,7 +71,7 @@ const AddNewDoctor = () => {
       formData.append("doctorDepartment", data.doctorDepartment);
       formData.append("docAvatar", docAvatar);
 
-      const response = await fetch("http://localhost:5000/api/admin/new/doctor", {
+      const response = await fetch("https://homecare-healthy-solution.onrender.com/api/admin/new/doctor", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,  
@@ -108,6 +108,7 @@ const AddNewDoctor = () => {
 
     } catch (error) {
       console.log("Error", error);
+      toast.error("Network or server error occurred.");
     }
 
 

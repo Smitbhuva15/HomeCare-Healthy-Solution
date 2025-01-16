@@ -4,16 +4,18 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../contexApi/AuthContex";
 
 const Login = () => {
     const navigate=useNavigate();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+     const {userData}= useContext(AuthContext)
 
     const onSubmit = async (data,e) => {
         e.preventDefault()
        
         try {
-            const response = await fetch('http://localhost:5000/api/user/login', {
+            const response = await fetch('https://homecare-healthy-solution.onrender.com/api/user/login', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -21,7 +23,7 @@ const Login = () => {
                 body: JSON.stringify(data)
             })
 
-            console.log(response);
+            
             if (response.ok) {
                 const message = await response.json();
                 localStorage.setItem("token",message.patient_token)
@@ -42,6 +44,7 @@ const Login = () => {
 
         } catch (error) {
             console.log("Error", error);
+            toast.error("Network or server error occurred.");
         }
 
        

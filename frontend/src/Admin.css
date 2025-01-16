@@ -166,7 +166,7 @@
   display: flex;
   gap: 20px;
 }
-.dashboard1 .banner1:first-child .firstBox1 {
+.dashboard1 .banner1:first-child .firstBox {
   flex: 2;
   display: flex;
   align-items: center;
@@ -174,27 +174,27 @@
   background: #b5b5ff;
   padding: 20px 20px 0 10px;
 }
-.dashboard1 .banner1:first-child .firstBox1 img {
+.dashboard1 .banner1:first-child .firstBox img {
   height: 100%;
   flex: 1;
 }
-.dashboard1 .banner1:first-child .firstBox1 .content1{
+.dashboard1 .banner1:first-child .firstBox .content1{
   flex: 2;
 }
-.dashboard1 .banner1:first-child .firstBox1 .content1 div {
+.dashboard1 .banner1:first-child .firstBox .content1 div {
   display: flex;
   align-items: center;
   font-size: 34px;
   margin-bottom: 12px;
 }
-.dashboard1 .banner1:first-child .firstBox1 .content1 div p {
+.dashboard1 .banner1:first-child .firstBox .content1 div p {
   margin-right: 10px;
   font-size: 34px;
 }
-.dashboard1 .banner1:first-child .firstBox1 .content1 div h5 {
+.dashboard1 .banner1:first-child .firstBox .content1 div h5 {
   color: #ff008d;
 }
-.dashboard1 .banner1:first-child .firstBox1 .content1 p {
+.dashboard1 .banner1:first-child .firstBox .content1 p {
   font-size: 16px;
 }
 .dashboard1 .banner1:first-child .secondBox1 {
@@ -264,7 +264,7 @@
 .dashboard1 .banner1 table select:focus {
   outline: none;
 }
-.dashboard1 .banner table .value-pending1 {
+.dashboard1 .banner1 table .value-pending1 {
   color: #eab308;
 }
 .dashboard1 .banner1 table .value-accepted1 {
@@ -284,11 +284,11 @@
   padding: 12px 0;
 }
 @media (max-width: 1376px) {
-  .dashboard1 .banner1:first-child .firstBox1 .content1 div,
-  .dashboard1 .banner1:first-child .firstBox1 .content1 div p {
+  .dashboard1 .banner1:first-child .firstBox .content1 div,
+  .dashboard1 .banner1:first-child .firstBox .content1 div p {
     font-size: 26px;
   }
-  .dashboard1 .banner1:first-child .firstBox1 .content1 p {
+  .dashboard1 .banner1:first-child .firstBox .content1 p {
     font-size: 14px;
   }
   .dashboard1 .banner1:first-child .secondBox1 p,
@@ -307,7 +307,7 @@
     flex-wrap: wrap;
     height: fit-content;
   }
-  .dashboard1 .banner1:first-child .firstBox1 {
+  .dashboard1 .banner1:first-child .firstBox {
     flex: none;
     width: 100%;
     height: 265px;
@@ -325,17 +325,17 @@
   }
 }
 @media (max-width: 485px) {
-  .dashboard1 .banner1:first-child .firstBox1 {
+  .dashboard1 .banner1:first-child .firstBox {
     flex-direction: column;
     height: fit-content;
     padding: 20px;
   }
-  .dashboard1 .banner1:first-child .firstBox1 img {
+  .dashboard1 .banner1:first-child .firstBox img {
     width: 270px;
     height: 270px;
     margin-bottom: 25px;
   }
-  .dashboard1 .banner1:first-child .firstBox1 div {
+  .dashboard1 .banner1:first-child .firstBox div {
     justify-content: center;
   }
 }

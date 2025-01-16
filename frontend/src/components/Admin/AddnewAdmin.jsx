@@ -11,18 +11,18 @@ const AddnewAdmin = () => {
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const { userData, token, loading,isverify } = useContext(AuthContext)
-  // console.log(userData.role, "user")
+  const { userData, token, loading, isverify } = useContext(AuthContext)
 
-   
+
+
 
   if (loading) {
     return (
-<div class="flex items-center justify-center min-h-screen">
-  <div class="w-24 h-24 border-8 border-t-8 border-transparent rounded-full animate-spin relative">
-    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-500 to-red-500 animate-spin-slow"></div>
-  </div>
-</div>  
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="w-24 h-24 border-8 border-t-8 border-transparent rounded-full animate-spin relative">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-500 to-red-500 animate-spin-slow"></div>
+        </div>
+      </div>
     )
   }
 
@@ -50,7 +50,7 @@ const AddnewAdmin = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/addadmin', {
+      const response = await fetch('https://homecare-healthy-solution.onrender.com/api/admin/addadmin', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,6 +90,7 @@ const AddnewAdmin = () => {
 
     } catch (error) {
       console.log("Error", error);
+      toast.error("Network or server error occurred.");
     }
 
   }
