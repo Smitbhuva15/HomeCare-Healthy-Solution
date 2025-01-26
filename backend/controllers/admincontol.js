@@ -75,7 +75,7 @@ exports.addnewadmin=async(req,res)=>{
       const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
       if (!allowedFormats.includes(docAvatar.mimetype)) {
         return res.status(400).json({ message: "File Format Not Supported !!" });
-      }
+       }
   
       const {
         firstName,

@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
     try {
         const { email, password, confirmPassword, role } = req.body;
 
-        if (!email || !password || !confirmPassword || !role) {
+        if (!email || !password ||  !confirmPassword || !role) {
             return res.status(401).json({ message: "Please Fill All The Fields !!" });
         }
 
@@ -93,10 +93,18 @@ exports.login = async (req, res) => {
         if (role !== existuser.role) {
             return res.status(400).json({ message: "User Not Found With This Role !!" });
         }
+
+        const userdata=
+        {
+          role:role
+        }
+
+        console.log( userdata)
         
         return res.status(200).json({ 
           message: "User Login Successfully !!",
           patient_token :await existuser.generateToken(),
+          userdata:userdata,
           id:existuser._id
         })
 
