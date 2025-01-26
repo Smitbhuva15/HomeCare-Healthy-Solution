@@ -13,6 +13,7 @@ const AddnewAdmin = () => {
   const navigate = useNavigate();
   const { userData, token, loading, isverify } = useContext(AuthContext)
 
+      const [loading1, setLoading1] = useState(false);
 
 
 
@@ -29,28 +30,28 @@ const AddnewAdmin = () => {
 
 
 
-  if (userData.role !== "Admin") {
-    navigate("/");
-  }
+  // if (userData.role !== "Admin") {
+  //   navigate("/");
+  // }
 
-  if (userData.role !== "Admin") {
+  // if (userData.role !== "Admin") {
 
-    return (
-      <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
-        <h1 >Only Admin Is Access This Feature!!</h1>
-      </div>
-    )
-  }
+  //   return (
+  //     <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
+  //       <h1 >Only Admin Is Access This Feature!!</h1>
+  //     </div>
+  //   )
+  // }
 
-
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 
   const onSubmit = async (data, e) => {
 
     e.preventDefault();
-
+    setLoading1(true)
     try {
-      const response = await fetch('https://homecare-healthy-solution.onrender.com/api/admin/addadmin', {
+      const response = await fetch(`${apiUrl}/api/admin/addadmin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +93,9 @@ const AddnewAdmin = () => {
       console.log("Error", error);
       toast.error("Network or server error occurred.");
     }
-
+    finally{
+      setLoading1(false)
+    }
   }
 
 
@@ -177,7 +180,21 @@ const AddnewAdmin = () => {
         </div>
 
         <div style={{ justifyContent: "center", alignItems: "center" }}>
-          <button type="submit" className="btn1">ADD NEW DOCTOR</button>
+        {
+            loading1?
+            (
+              <button type="submit" className="btn1 w-40 h-14 bg-blue-500 text-white rounded flex items-center justify-center">
+              <div className="w-5 h-5 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+              <span className="ml-2">Please wait</span>
+            </button>
+            
+            )
+            :
+            (
+              <button type="submit" className="btn1">ADD NEW DOCTOR</button>
+            )
+          }
+         
         </div>
       </form>
     </div>

@@ -15,6 +15,7 @@ import AddnewAdmin from './components/Admin/AddnewAdmin.jsx'
 import Dashborad from './components/Admin/Dashborad.jsx'
 import Doctors from './components/Admin/Doctors.jsx'
 import Message from './components/Admin/Message.jsx'
+import ProtectRoutes from './components/Admin/ProtectRoutes.jsx';
 
 
 
@@ -48,27 +49,27 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element:<ProtectRoutes><Admin /></ProtectRoutes>,
     children: [
       {
         path: '/admin',
-       element: <Dashborad/>
+       element: <ProtectRoutes><Dashborad/></ProtectRoutes>
       },
       {
         path: '/admin/add/admin',
-       element: <AddnewAdmin/>
+       element: <ProtectRoutes><AddnewAdmin/></ProtectRoutes>
       },
       {
         path: '/admin/add/doctor',
-       element: <AddNewDoctor/>
+       element: <ProtectRoutes><AddNewDoctor/></ProtectRoutes>
       },
       {
         path: '/admin/doctors',
-       element: <Doctors/>
+       element: <ProtectRoutes><Doctors/></ProtectRoutes>
       },
       {
         path: '/admin/message',
-       element: <Message/>
+       element: <ProtectRoutes><Message/></ProtectRoutes>
       },
       
       

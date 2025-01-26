@@ -7,7 +7,9 @@ import { AuthContext } from '../contexApi/AuthContex';
 
 const Navbar = () => {
 
-  const { userData, isverify, logout } = useContext(AuthContext);
+  const { userData, isverify,setToken, logout } = useContext(AuthContext);
+ 
+ 
  
   const [show, setShow] = useState(true);
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexApi/AuthContex";
 const AppoitmentForm = () => {
 
     const navigate = useNavigate();
-
+    const apiUrl = import.meta.env.VITE_BACKEND_URL;
     const { token,isverify } = useContext(AuthContext)
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -21,7 +21,8 @@ const AppoitmentForm = () => {
    
       const {doctorData}= useContext(AuthContext)
 
-      console.log(doctorData);
+    //   console.log(doctorData);
+      const [loading, setLoading] = useState(false);
 
 
 
@@ -29,7 +30,7 @@ const AppoitmentForm = () => {
     const onSubmit = async (olddata) => {
 
         const [firstName, lastName] = olddata.fullName.split(" ");
-
+        setLoading(true)
         const data = {
             ...olddata,
             doctor_firstName: firstName,
@@ -38,7 +39,7 @@ const AppoitmentForm = () => {
 
 
         try {
-            const response = await fetch("https://homecare-healthy-solution.onrender.com/api/user/appointment/send", {
+            const response = await fetch(`${apiUrl}/api/user/appointment/send`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,6 +71,10 @@ const AppoitmentForm = () => {
             console.log("Error", error);
 
         }
+        finally{
+            setLoading(false)
+        }
+        
     };
 
 
@@ -224,7 +229,21 @@ const AppoitmentForm = () => {
                     </div>
 
                     <div style={{ justifyContent: "center", alignItems: "center" }}>
-                        <button type="submit" className="btn1">Send</button>
+                    {
+                            loading ?
+                                (
+                                    <button type="submit" className="btn1 w-40 h-14 bg-blue-500 text-white rounded flex items-center justify-center">
+                                        <div className="w-5 h-5 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+                                        <span className="ml-2">Please wait</span>
+                                    </button>
+
+                                )
+                                :
+                                (
+                                    <button type="submit" className="btn1">Send</button>
+                                )
+                        }
+                     
                     </div>
                 </form>
             </div>

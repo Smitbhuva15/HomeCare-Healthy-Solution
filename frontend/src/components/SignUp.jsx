@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,18 +8,29 @@ import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [token, setToken] = useState(localStorage.getItem("token"));
+      const [loading, setLoading] = useState(false);
+  
+
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+  useEffect(() => {
+    if (token) {
+      navigate('/')
+    }
+
+  }, []);
 
   const onSubmit = async (olddata, e) => {
-    const data={
+    const data = {
       ...olddata,
       role: "Patient"
     }
     console.log(data);
-
+    setLoading(true)
     e.preventDefault()
 
     try {
-      const response = await fetch('https://homecare-healthy-solution.onrender.com/api/user/patient/register', {
+      const response = await fetch(`${apiUrl}/api/user/patient/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -30,7 +41,7 @@ const SignUp = () => {
       // console.log(response);
       if (response.ok) {
         const message = await response.json();
-        
+
         toast.success(message.message)
         reset();
         setTimeout(() => {
@@ -41,22 +52,25 @@ const SignUp = () => {
       else {
         const errormessage = await response.json();
         const mess = errormessage.message
-        const isAarry= await Array.isArray(mess);
-          if(isAarry){
-            for(let i=0;i<mess.length;i++){
-              toast.error(mess[i]);
-            }
+        const isAarry = await Array.isArray(mess);
+        if (isAarry) {
+          for (let i = 0; i < mess.length; i++) {
+            toast.error(mess[i]);
           }
-          else{
-            toast.error(mess)
-          }
+        }
+        else {
+          toast.error(mess)
+        }
 
-        
+
       }
 
     } catch (error) {
       console.log("Error", error);
       toast.error("Network or server error occurred.");
+    }
+    finally{
+      setLoading(false)
     }
 
 
@@ -130,10 +144,10 @@ const SignUp = () => {
                 value: 8,
                 message: 'Password must be at least 8 characters long'
               }
-            })} 
-  
+            })}
+
           />
-           
+
         </div>
         <div
           style={{
@@ -151,7 +165,21 @@ const SignUp = () => {
           </Link>
         </div>
         <div style={{ justifyContent: "center", alignItems: "center" }}>
-          <button type="submit" className="btn1">Register</button>
+        {
+                            loading ?
+                                (
+                                    <button type="submit" className="btn1 w-40 h-14 bg-blue-500 text-white rounded flex items-center justify-center">
+                                        <div className="w-5 h-5 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+                                        <span className="ml-2">Please wait</span>
+                                    </button>
+
+                                )
+                                :
+                                (
+                                  <button type="submit" className="btn1">Register</button>
+                                )
+                        }
+          
         </div>
       </form>
     </div>

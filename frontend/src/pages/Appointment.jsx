@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppoitmentHero from '../components/Appoitment/AppoitmentHero'
 import AppoitmentBiography from '../components/Appoitment/AppoitmentBiography'
 import AppoitmentForm from '../components/Appoitment/AppoitmentForm'
@@ -11,6 +11,15 @@ const Appointment = () => {
   const navigate= useNavigate();
 
 
+   const [token, setToken] = useState(localStorage.getItem("token"));
+  
+  
+    useEffect(() => {
+      if (!token) {
+        navigate('/login')
+      }
+  
+    }, []);
   
    
   

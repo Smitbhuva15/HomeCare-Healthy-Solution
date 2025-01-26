@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexApi/AuthContex';
 
 const Hero = () => {
   const { userData, isverify, logout } = useContext(AuthContext);
+  // fetchUserData();
   const username=userData.firstName||"To";
   return (
 

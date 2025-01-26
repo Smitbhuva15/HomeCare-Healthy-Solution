@@ -8,46 +8,47 @@ import { AuthContext } from '../../contexApi/AuthContex';
 const AddNewDoctor = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const { userData, token, loading, isverify  } = useContext(AuthContext)
+  const { userData, token, loading, isverify } = useContext(AuthContext)
 
   const [docAvatar, setDocAvatar] = useState("");
   const [docAvatarPreview, setDocAvatarPreview] = useState("");
+  const [loading1, setLoading1] = useState(false);
 
 
   if (loading) {
     return (
-<div class="flex items-center justify-center min-h-screen">
-  <div class="w-24 h-24 border-8 border-t-8 border-transparent rounded-full animate-spin relative">
-    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-500 to-red-500 animate-spin-slow"></div>
-  </div>
-</div>  
-    )
-  }
-
-
-
-
-  if (userData.role !== "Admin") {
-    navigate("/");
-  }
-
-  if (userData.role !== "Admin") {
-
-    return (
-      <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
-        <h1 >Only Admin Is Access This Feature!!</h1>
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="w-24 h-24 border-8 border-t-8 border-transparent rounded-full animate-spin relative">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-green-500 to-red-500 animate-spin-slow"></div>
+        </div>
       </div>
     )
   }
 
 
 
+
+  //   if (userData.role !== "Admin") {
+  //     navigate("/");
+  //   }
+
+  //   if (userData.role !== "Admin") {
+
+  //     return (
+  //       <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
+  //         <h1 >Only Admin Is Access This Feature!!</h1>
+  //       </div>
+  //     )
+  //   }
+
+
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const handleAvatar = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-    
+
       setDocAvatarPreview(reader.result);
       setDocAvatar(file);
     };
@@ -55,8 +56,9 @@ const AddNewDoctor = () => {
   }
 
   const onSubmit = async (data, e) => {
-    console.log(data);
+    // console.log(data);
     e.preventDefault();
+    setLoading1(true)
 
     try {
       const formData = new FormData();
@@ -71,36 +73,36 @@ const AddNewDoctor = () => {
       formData.append("doctorDepartment", data.doctorDepartment);
       formData.append("docAvatar", docAvatar);
 
-      const response = await fetch("https://homecare-healthy-solution.onrender.com/api/admin/new/doctor", {
+      const response = await fetch(`${apiUrl}/api/admin/new/doctor`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`,  
+          "Authorization": `Bearer ${token}`,
         },
-        body: formData, 
+        body: formData,
       });
-  
-    
+
+
       if (response.ok) {
         const message = await response.json();
         console.log(message);
         toast.success(message.message);
-        reset();  
+        reset();
         console.log(formData);
         setTimeout(() => {
-          navigate("/admin");  
+          navigate("/admin");
         }, 2000);
       } else {
         const errormessage = await response.json();
         const mess = errormessage.message;
         console.log(mess);
-        
+
         const isArray = Array.isArray(mess);
         if (isArray) {
           for (let i = 0; i < mess.length; i++) {
-            toast.error(mess[i]);  
+            toast.error(mess[i]);
           }
         } else {
-          toast.error(mess); 
+          toast.error(mess);
         }
       }
 
@@ -109,6 +111,9 @@ const AddNewDoctor = () => {
     } catch (error) {
       console.log("Error", error);
       toast.error("Network or server error occurred.");
+    }
+    finally {
+      setLoading1(false)
     }
 
 
@@ -208,8 +213,23 @@ const AddNewDoctor = () => {
                 <option value="Dermatology">Dermatology</option>
                 <option value="ENT">ENT</option>
               </select>
+              {
+                loading1 ?
+                  (
+                    <button type="submit" className="btn1 w-40 h-14 bg-blue-500 text-white rounded flex items-center justify-center">
+                      <div className="w-5 h-5 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+                      <span className="ml-2">Please wait</span>
+                    </button>
 
-              <button type="submit">Register New Doctor</button>
+                  )
+                  :
+                  (
+                    <button type="submit" className='btn1'>Register New Doctor</button>
+
+                  )
+              }
+
+
             </div>
 
 

@@ -13,13 +13,19 @@ export const AuthProvider = ({ children }) => {
 
     let isverify=!!token;
     // console.log(isverify);
-   
+    const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
+    const logout=()=>{
+        setToken("");
+        localStorage.removeItem("token");
+        window.location.reload(true)
+       }
 
     const fetchUserData = async () => {
     //   console.log(token)
          setLoading(true);
         try {
-            const response = await fetch('https://homecare-healthy-solution.onrender.com/api/user/auth', {
+            const response = await fetch(`${apiUrl}/api/user/auth`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -49,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
      const fechingDoctorData = async () => {
             try {
-                const response = await fetch("https://homecare-healthy-solution.onrender.com/api/user/getdatadoctor", {
+                const response = await fetch(`${apiUrl}/api/user/getdatadoctor`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`
@@ -81,15 +87,11 @@ export const AuthProvider = ({ children }) => {
     fechingDoctorData();
    }, [token]);
 
-   const logout=()=>{
-    setToken("");
-    window.location.reload(true);
-    return localStorage.removeItem("token");
-   }
+  
 
 
     return (
-        <AuthContext.Provider value={{userData,token,logout,isverify,doctorData ,loading}}>
+        <AuthContext.Provider value={{userData,token,isverify,doctorData,logout ,loading,setToken,fechingDoctorData,fetchUserData}}>
             {children}
         </AuthContext.Provider>
     );

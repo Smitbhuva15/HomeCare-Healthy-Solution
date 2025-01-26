@@ -23,22 +23,22 @@ const Message = () => {
 
 
   
-  if (userData.role !== "Admin") {
+//   if (userData.role !== "Admin") {
 
-    return (
-      <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
-        <h1 >Only Admin Is Access This Feature!!</h1>
-      </div>
-    )
-  }
+//     return (
+//       <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
+//         <h1 >Only Admin Is Access This Feature!!</h1>
+//       </div>
+//     )
+//   }
 
-
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [message, setMessage] = useState([]);
 
   const fetchingmessage = async () => {
     try {
-      const response = await fetch("https://homecare-healthy-solution.onrender.com/api/message/get/all/message", {
+      const response = await fetch(`${apiUrl}/api/message/get/all/message`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`

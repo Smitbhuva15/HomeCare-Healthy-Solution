@@ -8,6 +8,7 @@ import { MdAddModerator } from "react-icons/md";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import '../../Admin.css'
+import { AuthContext } from "../../contexApi/AuthContex";
 
 
 
@@ -15,6 +16,8 @@ const SideBar = () => {
 
   const [show, setShow] = useState(false);
   const navigate=useNavigate();
+
+  const {logout}=useContext(AuthContext)
 
   const gotoHomePage = () => {
     navigate("/admin");
@@ -39,6 +42,7 @@ const SideBar = () => {
 
   const handleLogout=()=>{
     navigate("/");
+    logout();
     setShow(!show);
 
 

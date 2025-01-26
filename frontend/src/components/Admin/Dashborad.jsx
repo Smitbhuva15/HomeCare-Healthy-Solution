@@ -25,16 +25,16 @@ const Dashborad = () => {
 
 
   
-  if (userData.role !== "Admin") {
+//   if (userData.role !== "Admin") {
 
-    return (
-      <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
-        <h1 >Only Admin Is Access This Feature!!</h1>
-      </div>
-    )
-  }
+//     return (
+//       <div className='container1 w-2/3 mx-auto flex items-center justify-center min-h-screen rounded-3xl my-20 bg-white text-indigo-600'>
+//         <h1 >Only Admin Is Access This Feature!!</h1>
+//       </div>
+//     )
+//   }
 
-
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 
   const [appointments, setAppointments] = useState([]);
@@ -43,7 +43,7 @@ const Dashborad = () => {
   const handleUpdateStatus = async (appointmentId, status) => {
 
     try {
-      const response = await fetch(`https://homecare-healthy-solution.onrender.com/api/user/appointment/update/${appointmentId}`, {
+      const response = await fetch(`${apiUrl}/api/user/appointment/update/${appointmentId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Dashborad = () => {
 
   const fetchingmessage = async () => {
     try {
-      const response = await fetch("https://homecare-healthy-solution.onrender.com/api/user/appointment/getall", {
+      const response = await fetch(`${apiUrl}/api/user/appointment/getall`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -139,10 +139,10 @@ const Dashborad = () => {
 
         <div className="banner1">
   <h5>Appointments</h5>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-  <table class="w-full text-sm text-left rtl:text-right  ">
+  <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table className="w-full text-sm text-left rtl:text-right  ">
 
-  <thead class="text-xs uppercase  ">
+  <thead className="text-xs uppercase  ">
 
                 <tr>
                 <th scope="col" className="px-6  py-3">

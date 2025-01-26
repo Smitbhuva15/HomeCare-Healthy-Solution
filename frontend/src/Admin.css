@@ -128,7 +128,7 @@
 .form-component1 .wrapper1 .banner1:last-child img {
   max-width: 450px;
 }
-@media (max-width: 888px) {
+@media (max-width: 1024px) {
   .form-component1 {
     padding-top: 30px;
     padding-bottom: 30px;
