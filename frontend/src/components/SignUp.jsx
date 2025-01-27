@@ -119,7 +119,7 @@ const SignUp = () => {
         <div>
           <input
             type="number"
-            placeholder="Aadhar Number"
+            placeholder="Aadhar Card Number"
             {...register("aadhar")}
 
           />
