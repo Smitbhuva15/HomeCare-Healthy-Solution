@@ -8,7 +8,7 @@ exports.patientregistration = async (req, res) => {
       lastName,
       email,
       phone,
-      nic,
+      aadhar,
       dob,
       gender,
       password,
@@ -17,7 +17,7 @@ exports.patientregistration = async (req, res) => {
 
     // Validate that all fields are provided
 
-    if (!firstName || !lastName || !email || !phone || !nic || !dob || !gender || !password || !role) {
+    if (!firstName || !lastName || !email || !phone || !aadhar || !dob || !gender || !password || !role) {
       return res.status(400).json({ message: "Please Fill All The Fields!!" });
     }
 
@@ -36,7 +36,7 @@ exports.patientregistration = async (req, res) => {
       lastName,
       email,
       phone,
-      nic,
+      aadhar,
       dob,
       gender,
       password: hashPassword,

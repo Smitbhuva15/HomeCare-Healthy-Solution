@@ -13,14 +13,14 @@ exports.addnewadmin=async(req,res)=>{
         lastName,
         email,
         phone,
-        nic,
+        aadhar,
         dob,
         gender,
         password
         
       } = req.body;
   
-      if (!firstName || !lastName || !email || !phone || !nic || !dob || !gender || !password ) {
+      if (!firstName || !lastName || !email || !phone || !aadhar || !dob || !gender || !password ) {
         return res.status(400).json({ message: "Please Fill All The Fields!!" });
       }
   
@@ -35,7 +35,7 @@ exports.addnewadmin=async(req,res)=>{
         lastName,
         email,
         phone,
-        nic,
+        aadhar,
         dob,
         gender,
         password:hashPassword,
@@ -82,14 +82,14 @@ exports.addnewadmin=async(req,res)=>{
         lastName,
         email,
         phone,
-        nic,
+        aadhar,
         dob,
         gender,
         password,
         doctorDepartment,
       } = req.body;
   
-      if (!firstName || !lastName || !email || !phone || !nic || !dob || !gender || !password || !doctorDepartment || !docAvatar) {
+      if (!firstName || !lastName || !email || !phone || !aadhar || !dob || !gender || !password || !doctorDepartment || !docAvatar) {
         return res.status(400).json({ message: "Please Fill Full Form! !!" });
       }
   
@@ -112,7 +112,7 @@ exports.addnewadmin=async(req,res)=>{
         lastName,
         email,
         phone,
-        nic,
+        aadhar,
         dob,
         gender,
         password: hashedPassword,  

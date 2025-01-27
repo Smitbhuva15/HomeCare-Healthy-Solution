@@ -11,7 +11,7 @@ exports.sendappointment=async(req,res)=>{
             lastName,
             email,
             phone,
-            nic,
+            aadhar,
             dob,
             gender,
             appointment_date,
@@ -28,7 +28,7 @@ exports.sendappointment=async(req,res)=>{
           !lastName ||
           !email ||
           !phone ||
-          !nic ||
+          !aadhar ||
           !dob ||
           !gender ||
           !appointment_date ||
@@ -63,7 +63,7 @@ exports.sendappointment=async(req,res)=>{
               lastName,
               email,
               phone,
-              nic,
+              aadhar,
               dob,
               gender,
               appointment_date,
