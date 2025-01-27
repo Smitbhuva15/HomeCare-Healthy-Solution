@@ -147,8 +147,8 @@ const AddnewAdmin = () => {
         <div>
           <input
             type="number"
-            placeholder="NIC"
-            {...register("nic")}
+            placeholder="Aadhar Card Number"
+            {...register("aadhar")}
 
           />
           <input

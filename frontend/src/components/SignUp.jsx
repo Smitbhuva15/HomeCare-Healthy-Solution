@@ -119,8 +119,8 @@ const SignUp = () => {
         <div>
           <input
             type="number"
-            placeholder="NIC"
-            {...register("nic")}
+            placeholder="Aadhar Number"
+            {...register("aadhar")}
 
           />
           <input

@@ -67,7 +67,7 @@ const AddNewDoctor = () => {
       formData.append("email", data.email);
       formData.append("phone", data.phone);
       formData.append("password", data.password);
-      formData.append("nic", data.nic);
+      formData.append("aadhar", data.aadhar);
       formData.append("dob", data.dob);
       formData.append("gender", data.gender);
       formData.append("doctorDepartment", data.doctorDepartment);
@@ -171,9 +171,9 @@ const AddNewDoctor = () => {
               />
               <input
                 type="number"
-                placeholder="NIC"
+                placeholder="Aadhar Card Number"
 
-                {...register("nic")}
+                {...register("aadhar")}
               />
               <input
                 type={"date"}

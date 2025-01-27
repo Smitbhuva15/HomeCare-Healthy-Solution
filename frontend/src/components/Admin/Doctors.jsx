@@ -98,7 +98,7 @@ const apiUrl = import.meta.env.VITE_BACKEND_URL;
                     Department: <span>{element.doctorDepartment}</span>
                   </p>
                   <p>
-                    NIC: <span>{element.nic}</span>
+                    Aadhar: <span>{element.aadhar}</span>
                   </p>
                   <p>
                     Gender: <span>{element.gender}</span>

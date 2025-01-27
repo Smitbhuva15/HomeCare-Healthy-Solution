@@ -115,9 +115,9 @@ const AppoitmentForm = () => {
                     <div>
                         <input
                             type="number"
-                            placeholder="NIC"
+                            placeholder="Aadhar Number"
 
-                            {...register("nic")}
+                            {...register("aadhar")}
 
                         />
                         <input
